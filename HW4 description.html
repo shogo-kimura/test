@@ -1,0 +1,144 @@
+
+<!-- saved from url=(0070)file:///var/folders/3k/zrqml5hx3tlfr6s4w4yyyrmw0000gn/T/tmpo4on6Z.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><style>html { 
+    font-size: 100%; 
+    overflow-y: scroll; 
+    -webkit-text-size-adjust: 100%; 
+    -ms-text-size-adjust: 100%; 
+}
+
+body{
+    font-family: helvetica, arial, freesans, clean, sans-serif;
+    color: #333;
+    background-color: #fff;
+    border-color: #999999;
+    border-width: 2px;
+    line-height: 1.5;
+    margin: 2em 3em;
+    text-align:left;
+    padding: 0 100px 0 100px;
+}
+
+pre{
+    background-color: #eee;
+    padding: 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    overflow: auto;
+}
+code{
+    background-color: #eee;
+    padding: 1px 3px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px; 
+}
+pre code {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+li p{
+    margin: 0.3em;
+}
+ul > li{
+    list-style-type: disc;
+}
+a:link, a:visited{
+    color: #33e;
+    text-decoration: none;
+}
+a:hover{
+    color: #00f;
+    text-shadow:1px 1px 2px #ccf;
+    text-decoration:underline;
+}
+h1{
+    color: #999;
+    font-weight: 400;
+    font-size: 36px;
+}
+h2{
+    border-bottom: 1px dotted #aaa;
+    margin-bottom: 1em;
+    color: #333;
+    font-size: 30px;
+}
+h3{
+    color: #666;
+    font-size: 24px;
+}
+h4 {
+    font-size: 21px;
+}
+h5 {
+    font-size: 18px;
+}
+.shadow{
+    -webkit-box-shadow:0 5px 15px #000;
+    -moz-box-shadow:0 5px 15px #000;
+    box-shadow:0 5px 15px #000;     
+}
+</style></head><body><h1>Illini Spatio (a.k.a. Space Avengers)</h1>
+<ul>
+<li>Shengchao Huangfu</li>
+<li>Shogo Kimura</li>
+<li>Yuk Yin Maurice Lam</li>
+</ul>
+<h2>This Document</h2>
+<p>This document is intended to be supplementary to the comments inside the source files and the actual source codes themselves. </p>
+<h2>Brief Description of our project</h2>
+<ul>
+<li>Creating a web application in which a user can search study spaces in UIUC libraries.</li>
+<li><a href="https://wiki.engr.illinois.edu/display/cs428sp13/Space+Avengers">Project page</a></li>
+<li><a href="http://cs429.chencharlie.com/">Demo page</a></li>
+</ul>
+<h2>The files to be reviewed</h2>
+<ul>
+<li><code>markers.js</code> - about markers which point to UIUC libraries on Google Map.</li>
+<li><code>main.html</code>  - usage of <code>markers</code> directives can be seen from here.</li>
+<li><code>geo.js</code>     - about information of the user's current location.</li>
+<li><code>main.js</code>    - relevant parts are the usage of the <code>geo</code> service. </li>
+</ul>
+<h2>User Stories</h2>
+<ul>
+<li>
+<p>A user can see markers which point to UIUC libraries on Google Map.</p>
+</li>
+<li>
+<p>When a user clicks a marker which points to a library on Google Map, an information window pops up and he/she can choose a study space in the library.</p>
+</li>
+<li>
+<p>A user's current location is pointed as a blue dot on Google Map.</p>
+</li>
+<li>
+<p>When a user clicks a button at the right bottom corner on Google Map, the map focuses on the user's current location.</p>
+</li>
+</ul>
+<h2>Information about AngularJS</h2>
+<p>We are using an open-source JavaScript Framework called <a href="http://angularjs.org/">AngularJS</a> by Google. It uses some special/weird patterns and constructs. (It is a little hard to wrap your head around at first, so we recommend you to look through AngularJS official website if you are confused.)</p>
+<ul>
+<li>
+<p>Controller:   Typical in the MVC model, a controller controls the data flow, and controls the presentation of data in the views. Controller is (somewhat unfortunately) tightly coupled with the scope object. The scope object contains the data passed in from models, and they can be thought of as the <code>this</code> of the controller.</p>
+</li>
+<li>
+<p>Scope:        The scope object stores the data from the model and is used for data binding. For example, if in the HTML there is <code>&lt;a href="{{something}}"&lt;/a&gt;</code>, the <code>scope.something</code> will be set as the link location of the anchor tag. </p>
+</li>
+<li>
+<p>Directive:    Directives are responsible for manipulating the DOM. The <em>Angular way</em> is to keep DOM manipulations off the controller and have them in a separate resuable component called directive. They hook up with the HTML syntax so if in the HTML markup you have <code>&lt;a my-directive="valueToBePassedIn"&gt;&lt;/a&gt;</code>, the element will automatically initialize the directive object and has the functionalities. <code>marker.js</code> is an example of directive.</p>
+</li>
+<li>
+<p>Service:      A service is a reusable code component that provides some standard functionalities. For example, Angular JS by default provides the <code>$compile</code> service which allows us to compile HTML code / elements with Angular directives in them. Services are generally injected into controllers or directives so that they can use the functions. </p>
+</li>
+<li>
+<p>Special functions:</p>
+<ul>
+<li><code>$watch</code>: The <code>$watch</code> function watches a variable in the scope for changes. The callback function is fired whenever something changes. If the function is called without the first parameter, the function is called on every user interaction (including mousemove!). </li>
+</ul>
+</li>
+</ul>
+<h2>Additional resources</h2>
+<ul>
+<li><a href="http://outbottle.com/angularjs-a-crash-course-in-processing-ajax-json/">AngularJS – A crash course – in processing AJAX JSON</a></li>
+<li><a href="http://www.egghead.io/">Egghead</a></li>
+</ul></body></html>

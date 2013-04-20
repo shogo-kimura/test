@@ -1,0 +1,38 @@
+<div class="row-fluid">
+    <div class="ss-header span12">
+        <div ss-filter="$parent.spaceFilter" items="$parent.spaces"></div>
+    </div>
+</div>
+<div class="content row-fluid">
+    <!-- Google Map component -->
+    <div id="map_canvas" ui-map="gmap" ui-options="mapOptions" class="gmap span7" locate-me-btn>
+        <div map-markers="spaces | markers:gmap" map-click="onMarkerClicked" icon="'images/marker.png'">
+            <div map-info-window="mapInfo" class="map-info">
+                <h3>{{marker.name}}</h3>
+                <div ng-repeat="space in marker.spaces">
+                    <a href="#!/main?spot={{space.id}}">{{space.name}}</a>
+                </div>
+            </div>
+        </div>
+        <div map-markers="mylocation.coords" icon="mylocationSymbol"></div>
+    </div>
+    <!-- Space list component -->
+    <div class="spacelist span5">
+        <div ng-class="{selected: space==selectedSpot}" class="spacelist-item" ng-repeat="space in spaces | filter:spaceFilter">
+            <a ng-href="#!/main?spot={{space.id}}">
+                <img class="space-image" ng-src="{{space.images[0].url}}" />
+                <div class="space-type">{{space.type}}</div>
+                <!-- <div class="space-seats">{{space.seats}}</div> -->
+                <div class="space-name">{{space.name}}</div>
+                <div class="space-location">{{space.location.building_name}}</div>
+            </a>
+        </div>
+    </div>
+    <div ui-toggle="selectedSpot!=null" ng-init="selectedSpot = null" class="details span7">
+        <a class="close" href="#!/main">x</a>
+        <div ss-detail="selectedSpot"></div>
+    </div>
+</div>
+<div class="row-fluid">
+    <div ng-include src="'views/footer.html'" class="span12 row"></div>
+</div>
